@@ -1,15 +1,12 @@
 {
-  "name": "babel-starter-kit",
-  "version": "0.0.0",
-  "description": "A project template for authoring and publishing JavaScript libraries",
-  "homepage": "http://www.kriasoft.com/babel-starter-kit",
-  "repository": "kriasoft/babel-starter-kit",
-  "author": "Kriasoft <support@kriasoft.com> (http://www.kriasoft.com)",
-  "contributors": [
-    "Konstantin Tarkus <hello@tarkus.me>"
-  ],
+  "name": "git-repository",
+  "version": "0.0.3",
+  "description": "A Promise-based wrapper library for Git CLI",
+  "homepage": "http://www.tarkus.me/git-repository/",
+  "repository": "koistya/git-repository",
+  "author": "Konstantin Tarkus <hello@tarkus.me> (http://www.tarkus.me)",
   "license": "MIT",
-  "main": "lib/index.js",
+  "main": "lib/Repository.js",
   "dependencies": {},
   "devDependencies": {
     "autoprefixer-core": "^5.2.1",
@@ -19,11 +16,11 @@
     "browser-sync": "^2.8.2",
     "browserify": "^11.0.1",
     "chai": "^3.2.0",
+    "chai-as-promised": "^5.1.0",
     "cssnano": "^2.2.0",
     "cssnext": "^1.8.3",
     "del": "^1.2.1",
     "eslint": "^1.1.0",
-    "eslint-plugin-react": "^3.2.2",
     "front-matter": "^1.0.0",
     "gaze": "^0.5.1",
     "highlight.js": "^8.7.0",
@@ -42,6 +39,6 @@
     "test": "mocha test --compilers js:babel/register",
     "build": "babel-node tools/build",
     "start": "babel-node tools/serve",
-    "publish": "babel-node tools/build && cd build && git init && git add --all . && git commit --amend --no-edit && git push origin gh-pages -f"
+    "publish2": "babel-node tools/build && cd build && git init && git add --all . && git commit --amend --no-edit && git push origin gh-pages -f"
   }
 }

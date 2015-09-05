@@ -12,7 +12,7 @@ import { rootDir } from './config';
 const cleanup = async () => new Promise((resolve) => {
   del(['build/*', 'lib/*', '!build/.git'], { dot: true }, async () => {
     await fs.makeDir('build');
-    await fs.makeDir('lib');
+    await fs.makeDir('lib/utils');
     resolve();
   });
 });
@@ -26,7 +26,6 @@ const src = async () => {
     let source = await fs.readFile('src/' + file);
     let result = babel.transform(source);
     await fs.writeFile('lib/' + file, result.code);
-    await fs.writeFile('lib/' + file.substr(0, file.length - 3) + '.babel.js', source);
   }
 };
 

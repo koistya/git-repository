@@ -1,8 +1,8 @@
 ---
-title: Babel Starter Kit
+title: JavaScript wrapper library for Git CLI
 ---
 
-# Babel Starter Kit
+# JavaScript wrapper library for Git CLI
 
 JavaScript library boilerplate, a project template for authoring and
 publishing JavaScript libraries built with [ES6+](http://babeljs.io/docs/learn-es2015/),
