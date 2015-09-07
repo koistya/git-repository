@@ -46,6 +46,10 @@ class Repository {
   }
 
   add(files) {
+    return this.addFiles(files);
+  }
+
+  addFiles(files) {
     const opts = { cwd: this.path, stdio: 'inherit' };
     return cp.spawn('git', ['add', ...(files.split(/\s+/))], opts);
   }

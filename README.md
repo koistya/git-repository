@@ -6,7 +6,7 @@
 
 > A Promise-based JavaScript wrapper library for working with Git CLI.
 
-Join [#feedback](https://gitter.im/koistya/feedback) chat room on Gitter to stay up to date and share your feedback!
+Join [#git-repository](https://gitter.im/koistya/git-repository) chat room on Gitter to stay up to date and share your feedback!
 
 ### How to Setup
 
@@ -17,19 +17,24 @@ $ npm install git-repository
 ### Getting Started
 
 ```js
-import Repo from 'git-repository';
+import GitRepository from 'git-repository';
 
 export default async () => {
 
-  let repo = await Repo.open('./example', { init: true });
+  let repo = await GitRepository.open('./example', { init: true });
 
   await repo.setRemote('origin', 'https://github.com/user/example.git');
-  await repo.add('--all .');
+  await repo.addFiles('--all .');
   await repo.commit('Commit message');
   await repo.push('origin', 'master');
 
 };
 ```
+
+### Related Projects
+
+ * [Babel](http://babeljs.io/) — A JavaScript compiler (ES6/ES7 → ES5.1)
+ * [Babel Starter Kit](https://github.com/kriasoft/babel-starter-kit) — A boilerplate for authoring JavaScript/React.js libraries
 
 ### License
 
