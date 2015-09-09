@@ -16,8 +16,10 @@ chai.use(require('chai-as-promised'));
 
 describe('Repository.open(path, options)', () => {
 
+  const repoName = 'test-repo1';
+
   beforeEach(done => {
-    del('test-repo', () => fs.mkdir(resolve(__dirname, '../test-repo')).then(done, done));
+    del(repoName, () => fs.mkdir(resolve(__dirname, `../${repoName}`)).then(done, done));
   });
 
   it(`Check if the specified path exists`, () => {
@@ -26,13 +28,37 @@ describe('Repository.open(path, options)', () => {
   });
 
   it(`Should throw an exception if Git repository does not exist`, () => {
-    return expect(Repository.open('test-repo'))
-      .be.rejectedWith(Error, `Cannot find a Git repository in '${resolve(__dirname, '../test-repo')}'.`);
+    return expect(Repository.open(repoName))
+      .be.rejectedWith(Error, `Cannot find a Git repository in '${resolve(__dirname, `../${repoName}`)}'.`);
   });
 
   it(`Should create a new Git repository if it does not exist`, () => {
-    return expect(Repository.open('test-repo', { init: true }))
+    return expect(Repository.open(repoName, { init: true }))
       .eventually.be.instanceOf(Repository);
+  });
+
+});
+
+describe('Repository#setRemote(name, url)', () => {
+
+  let repo;
+  let repoName = 'test-repo2';
+
+  beforeEach(async () => {
+    let repoPath = resolve(__dirname, `../${repoName}`);
+    let gitPath = resolve(__dirname, `../${repoName}/.git`);
+
+    if (await fs.exists(repoPath)) {
+      await del(gitPath);
+    } else {
+      await fs.mkdir(repoPath);
+    }
+
+    repo = await Repository.open(repoName, { init: true });
+  });
+
+  it(`Should set a remote URL`, async () => {
+    await repo.setRemote('test', 'https://github.com/test/test.git');
   });
 
 });

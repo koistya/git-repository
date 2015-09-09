@@ -17,14 +17,14 @@ $ npm install git-repository
 ### Getting Started
 
 ```js
-import GitRepository from 'git-repository';
+import Repo from 'git-repository';
 
 export default async () => {
 
-  let repo = await GitRepository.open('./example', { init: true });
+  let repo = await Repo.open('./example', { init: true });
 
   await repo.setRemote('origin', 'https://github.com/user/example.git');
-  await repo.addFiles('--all .');
+  await repo.add('--all .');
   await repo.commit('Commit message');
   await repo.push('origin', 'master');
 

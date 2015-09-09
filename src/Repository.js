@@ -41,8 +41,15 @@ class Repository {
     return new Repository(path);
   }
 
-  setRemote(name, url) {
-    throw new Error('Not implemented.');
+  async setRemote(name, url) {
+    const opts = { cwd: this.path };
+    const [, remote] = await cp.exec('git', ['config', '--get', `remote.${name}.url`], opts);
+    opts.stdio = 'inherit';
+    if (remote) {
+      await cp.spawn('git', ['remote', 'set-url', name, url], opts);
+    } else {
+      await cp.spawn('git', ['remote', 'add', name, url], opts);
+    }
   }
 
   add(files) {
