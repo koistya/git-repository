@@ -1,6 +1,6 @@
 {
   "name": "git-repository",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A Promise-based wrapper library for Git CLI",
   "homepage": "http://www.tarkus.me/git-repository/",
   "repository": "koistya/git-repository",
