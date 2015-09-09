@@ -3,6 +3,7 @@
 
 build
 lib
+!tools/lib
 node_modules
 test-repo
 npm-debug.log

@@ -12,23 +12,15 @@ const exists = filename => new Promise(resolve => {
 });
 
 const isDirectory = filename => new Promise((resolve, reject) => {
-  fs.stat(filename, (err, stat) => {
-    if (err) {
-      reject(err);
-    } else {
-      resolve(stat && stat.isDirectory());
-    }
-  });
+  fs.stat(filename, (err, stat) =>
+    err ? reject(err) : resolve(stat && stat.isDirectory())
+  );
 });
 
 const readDir = directory => new Promise((resolve, reject) => {
-  fs.readdir(directory, (err, files) => {
-    if (err) {
-      reject(err);
-    } else {
-      resolve(files);
-    }
-  });
+  fs.readdir(directory, (err, files) =>
+    err ? reject(err) : resolve(files)
+  );
 });
 
 const getFiles = async (directory) => {
@@ -46,33 +38,19 @@ const getFiles = async (directory) => {
 };
 
 const readFile = filename => new Promise((resolve, reject) => {
-  fs.readFile(filename, 'utf8', (err, contents) => {
-    if (err) {
-      reject(err);
-    } else {
-      resolve(contents);
-    }
-  });
+  fs.readFile(filename, 'utf8', (err, contents) =>
+    err ? reject(err) : resolve(contents)
+  );
 });
 
 const writeFile = (filename, contents) => new Promise((resolve, reject) => {
-  fs.writeFile(filename, contents, 'utf8', err => {
-    if (err) {
-      reject(err);
-    } else {
-      resolve();
-    }
-  });
+  fs.writeFile(filename, contents, 'utf8', err =>
+    err ? reject(err) : resolve()
+  );
 });
 
 const makeDir = name => new Promise((resolve, reject) => {
-  mkdirp(name, err => {
-    if (err) {
-      reject(err);
-    } else {
-      resolve();
-    }
-  });
+  mkdirp(name, err => err ? reject(err) : resolve());
 });
 
 const copyFile = (src, dest) => new Promise((resolve, reject) => {

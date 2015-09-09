@@ -66,13 +66,9 @@ const js = async (options) => new Promise((resolve, reject) => {
   browserify('docs/js/main.js', {
     debug: !!options.debug,
     transform: [babelify]
-  }).bundle((err, buffer) => {
-    if (err) {
-      reject(err);
-    } else {
-      resolve(buffer.toString('utf8'));
-    }
-  });
+  }).bundle((err, buffer) =>
+    err ? reject(err) : resolve(buffer.toString('utf8'))
+  );
 });
 
 export default { md, css, js };
