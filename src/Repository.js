@@ -71,6 +71,20 @@ class Repository {
     return cp.spawn('git', ['push', remote, branch], opts);
   }
 
+  fetch(remote) {
+    const opts = { cwd: this.path, stdio: 'inherit' };
+    return cp.spawn('git', ['fetch', remote], opts);
+  }
+
+  reset(target, options = {}) {
+    const opts = { cwd: this.path, stdio: 'inherit' };
+    return cp.spawn('git', [
+      'reset',
+      ...(options.hard && ['--hard']),
+      target
+    ], opts);
+  }
+
 }
 
 export default Repository;
