@@ -96,13 +96,17 @@ class Repository {
     ], opts);
   }
 
-  clean(options = {}) {
+  clean(path, options = {}) {
+    if (typeof path !== 'string') {
+      options = path || options; // eslint-disable-line no-param-reassign
+      path = false;              // eslint-disable-line no-param-reassign
+    }
     const opts = { cwd: this.path, stdio: 'inherit' };
     return cp.spawn('git', [
       'clean',
       '-d',
       ...(options.force && ['--force']),
-      target,
+      ...(path && [path]),
     ], opts);
   }
 
