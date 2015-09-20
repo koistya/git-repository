@@ -77,9 +77,13 @@ class Repository {
     return cp.spawn('git', ['commit', '-m', message], opts);
   }
 
-  push(remote = 'origin', branch = 'master') {
+  push(remote = 'origin', branch = 'master', options = {}) {
     const opts = { cwd: this.path, stdio: 'inherit' };
-    return cp.spawn('git', ['push', remote, branch], opts);
+    const args = ['push', remote, branch];
+    if (options.force) {
+      args.push('--force');
+    }
+    return cp.spawn('git', args, opts);
   }
 
   fetch(remote) {
