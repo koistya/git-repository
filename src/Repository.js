@@ -96,7 +96,7 @@ class Repository {
     ], opts);
   }
 
-  clean(target, options = {}) {
+  clean(options = {}) {
     const opts = { cwd: this.path, stdio: 'inherit' };
     return cp.spawn('git', [
       'clean',
