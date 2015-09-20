@@ -7,12 +7,19 @@
 
 import fs from 'fs';
 
-const exists = path => new Promise(resolve => {
-  fs.exists(path, resolve)
-});
+function exists(path) {
+  return new Promise(resolve => {
+    fs.exists(path, resolve);
+  });
+}
 
-const mkdir = path => new Promise((resolve, reject) => {
-  fs.mkdir(path, err => err ? reject(err) : resolve());
-});
+function mkdir(path) {
+  return new Promise((resolve, reject) => {
+    fs.mkdir(path, err => err ? reject(err) : resolve());
+  });
+}
 
-export default { exists, mkdir };
+export default {
+  exists,
+  mkdir,
+};

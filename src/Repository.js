@@ -16,7 +16,7 @@ class Repository {
   }
 
   static async open(path, options = {}) {
-    path = resolve(process.cwd(), path);
+    path = resolve(process.cwd(), path); // eslint-disable-line no-param-reassign
     let exists = await fs.exists(path);
 
     if (!exists) {
@@ -52,6 +52,17 @@ class Repository {
     }
   }
 
+  async hasRef(repository, ref) {
+    const opts = { cwd: this.path };
+    const [code,, err] = await cp.exec('git', ['ls-remote', '--exit-code', repository, ref], opts);
+    if (code === 2) {
+      return false;
+    } else if (code === 0) {
+      return true;
+    }
+    throw new Error(err);
+  }
+
   add(files) {
     return this.addFiles(files);
   }
@@ -81,7 +92,17 @@ class Repository {
     return cp.spawn('git', [
       'reset',
       ...(options.hard && ['--hard']),
-      target
+      target,
+    ], opts);
+  }
+
+  clean(target, options = {}) {
+    const opts = { cwd: this.path, stdio: 'inherit' };
+    return cp.spawn('git', [
+      'clean',
+      '-d',
+      ...(options.force && ['--force']),
+      target,
     ], opts);
   }
 

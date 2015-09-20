@@ -18,8 +18,9 @@ describe('Repository.open(path, options)', () => {
 
   const repoName = 'test-repo1';
 
-  beforeEach(done => {
-    del(repoName, () => fs.mkdir(resolve(__dirname, `../${repoName}`)).then(done, done));
+  beforeEach(async () => {
+    await del(repoName);
+    await fs.mkdir(resolve(__dirname, `../${repoName}`));
   });
 
   it(`Check if the specified path exists`, () => {
@@ -59,6 +60,13 @@ describe('Repository#setRemote(name, url)', () => {
 
   it(`Should set a remote URL`, async () => {
     await repo.setRemote('test', 'https://github.com/test/test.git');
+  });
+
+  it(`Should check if a remote ref exists`, async () => {
+    const result1 = await repo.hasRef('https://github.com/koistya/git-repository.git', 'master');
+    const result2 = await repo.hasRef('https://github.com/koistya/git-repository.git', 'dummy');
+    expect(result1).to.be.true;
+    expect(result2).to.be.false;
   });
 
 });

@@ -8,8 +8,9 @@
 import cp from 'child_process';
 
 const exec = (command, args, options) => new Promise((resolve, reject) => {
-  let out = '', err = '';
-  let p = cp.spawn(command, args, options);
+  let out = '';
+  let err = '';
+  const p = cp.spawn(command, args, options);
   p.stdout.on('data', data => out += data);
   p.stderr.on('data', data => err += data);
   p.on('error', reject);
