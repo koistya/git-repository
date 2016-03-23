@@ -63,6 +63,15 @@ class Repository {
     throw new Error(err);
   }
 
+  config(key, value, options = {}) {
+    const opts = { cwd: this.path, stdio: 'inherit' };
+    const args = ['config', key, value];
+    if (options.global) {
+      args.push('--global');
+    }
+    return cp.spawn('git', args, opts);
+  }
+
   add(files) {
     return this.addFiles(files);
   }
