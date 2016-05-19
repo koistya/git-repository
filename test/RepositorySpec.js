@@ -62,7 +62,8 @@ describe('Repository#setRemote(name, url)', () => {
     await repo.setRemote('test', 'https://github.com/test/test.git');
   });
 
-  it(`Should check if a remote ref exists`, async () => {
+  it(`Should check if a remote ref exists`, async function() {
+    this.timeout(5000);
     const result1 = await repo.hasRef('https://github.com/koistya/git-repository.git', 'master');
     const result2 = await repo.hasRef('https://github.com/koistya/git-repository.git', 'dummy');
     expect(result1).to.be.true;
