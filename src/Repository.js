@@ -63,6 +63,22 @@ class Repository {
     throw new Error(err);
   }
 
+  async checkout(branch, options = {}) {
+    const opts = { cwd: this.path };
+    const args = ['checkout', branch];
+    if (options.new) {
+      args.splice(1, 0, '-b');
+    }
+    const [code,, err] = await cp.exec('git', args, opts);
+    if (code === 128) {
+      throw new Error(err);
+    // } else if (code === 1) {
+    //   throw new Error(`'${branch}' is not a valid branch name.`);
+    } else if (code === 0 || code === 1) {
+      return true;
+    }
+  }
+
   config(key, value, options = {}) {
     const opts = { cwd: this.path, stdio: 'inherit' };
     const args = ['config', key, value];
